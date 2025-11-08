@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Staff - HHMI Convene</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F9FAFB;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            color: #0A0A0A;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            background: #FFFFFF;
+            border-bottom: 1px solid #E5E7EB;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.1), 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu a {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4A5565;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-menu a:hover {
+            background: #F3F5F6;
+            color: #101828;
+        }
+
+        .nav-menu a.active {
+            background: #000000;
+            color: #FFFFFF;
+        }
+
+        /* Top Banner Section */
+        .banner-section {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: #0A0B14;
+            overflow: hidden;
+        }
+
+        .banner-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(2, 23, 26, 0.5) 54%, rgba(1, 25, 26, 1) 100%);
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            padding: 250px 16px 40px;
+            max-width: 390px;
+            margin: 0 auto;
+        }
+
+        .banner-title {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 1.33em;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .banner-description {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.42em;
+            color: #FFFFFF;
+            opacity: 0.7;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            width: 100%;
+            max-width: 390px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 32px 16px;
+        }
+
+        .section-gray {
+            background: #EFF0F1;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 1.4em;
+            text-transform: uppercase;
+            color: #101828;
+        }
+
+        .show-all-link {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #00A450;
+            text-decoration: none;
+        }
+
+        .show-all-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Conference Card */
+        .conference-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .card-banner {
+            position: relative;
+            width: 100%;
+            height: 161px;
+            overflow: hidden;
+        }
+
+        .card-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .card-content {
+            padding: 16px;
+        }
+
+        .card-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px;
+            background: #F3F5F6;
+            border: 1px solid #E5E7EB;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .tag-indicator {
+            width: 2px;
+            height: 12px;
+            background: #EEDC11;
+            border-radius: 4px;
+        }
+
+        .tag-text {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 1.33em;
+            color: #000000;
+        }
+
+        .card-title {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 1.33em;
+            color: #101828;
+            margin: 8px 0;
+        }
+
+        .card-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-icon {
+            width: 16px;
+            height: 16px;
+            color: #4A5565;
+        }
+
+        .detail-text {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.43em;
+            color: #4A5565;
+        }
+
+        .card-divider {
+            width: 100%;
+            height: 1px;
+            background: #E5E7EB;
+            margin: 8px 0;
+        }
+
+        .card-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 8px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .timeline-time {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 1.67em;
+            color: #4A5565;
+        }
+
+        .timeline-card {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 8px 8px 4px;
+            background: #F3F5F6;
+            border-radius: 4px;
+        }
+
+        .timeline-indicator {
+            width: 4px;
+            height: 100%;
+            background: #E3DF09;
+            border-radius: 2px;
+        }
+
+        .timeline-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 4px 0;
+        }
+
+        .timeline-title {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.29em;
+            letter-spacing: 0.033em;
+            color: #4A5565;
+        }
+
+        .timeline-description {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.07em;
+            color: #4A5565;
+        }
+
+        .card-button {
+            width: 100%;
+            padding: 8px 16px;
+            background: #000000;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.21em;
+            letter-spacing: 0.033em;
+            color: #FFFFFF;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .card-button:hover {
+            background: #1a1a1a;
+        }
+
+        /* Activity Card */
+        .activity-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .activity-content {
+            padding: 16px;
+        }
+
+        .activity-title {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 1.33em;
+            color: #101828;
+            margin-bottom: 8px;
+        }
+
+        .activity-location {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 1.58em;
+            color: #4A5565;
+            margin-bottom: 8px;
+        }
+
+        /* Past Event Card */
+        .past-event-card {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .past-event-card:hover {
+            box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.1), 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .past-event-image {
+            width: 72px;
+            height: 90px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .past-event-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 2px 0;
+        }
+
+        .past-event-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .past-event-date {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.43em;
+            color: #000000;
+        }
+
+        .past-event-arrow {
+            width: 20px;
+            height: 20px;
+            color: #FFFFFF;
+        }
+
+        .past-event-title {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1.38em;
+            color: #101828;
+        }
+
+        /* Announcements Section */
+        .announcements-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .announcement-card {
+            flex: 0 0 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .announcement-image {
+            width: 300px;
+            height: 200px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .announcement-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .announcement-date {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 1.33em;
+            color: #000000;
+        }
+
+        .announcement-title {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1.38em;
+            color: #101828;
+        }
+
+        /* Footer */
+        .footer {
+            background: #000000;
+            padding: 24px 16px;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-family: 'Helvetica Now Display', 'Helvetica Neue', 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 1.33em;
+            color: #838286;
+            margin-bottom: 4px;
+        }
+
+        /* Icons */
+        .icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .banner-section {
+                height: 300px;
+            }
+
+            .banner-content {
+                padding: 180px 16px 30px;
+            }
+
+            .banner-title {
+                font-size: 20px;
+            }
+
+            .banner-description {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-menu">
+        <a href="index.html">Main</a>
+        <a href="new-staff.html" class="active">New Staff</a>
+    </nav>
+
+    <!-- Banner Section -->
+    <div class="banner-section">
+        <img src="images/banner-bg.png" alt="Banner" class="banner-bg">
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <h1 class="banner-title">HHMI Convene</h1>
+            <p class="banner-description">Explore Your Conferences: Connect with leading scientists at HHMI's top research events and workshops.</p>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- My Events Section -->
+        <div class="section section-gray">
+            <div class="section-header">
+                <h2 class="section-title">My Events</h2>
+            </div>
+
+            <!-- Conference Card 1 -->
+            <div class="conference-card">
+                <div class="card-banner">
+                    <img src="images/conference-card-1-7351d3.png" alt="Conference">
+                    <div class="card-banner-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-tag">
+                        <div class="tag-indicator"></div>
+                        <span class="tag-text">Now: Prepare for the arrival</span>
+                    </div>
+                    <h3 class="card-title">Connecting Circles: Salesforce Admins and More Circle to Build Connections</h3>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <svg class="detail-icon icon" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 2C5.79 2 4 3.79 4 6C4 9 8 13 8 13C8 13 12 9 12 6C12 3.79 10.21 2 8 2ZM8 7.5C7.17 7.5 6.5 6.83 6.5 6C6.5 5.17 7.17 4.5 8 4.5C8.83 4.5 9.5 5.17 9.5 6C9.5 6.83 8.83 7.5 8 7.5Z" fill="currentColor"/>
+                            </svg>
+                            <span class="detail-text">Janelia Research Campus, VA</span>
+                        </div>
+                        <div class="detail-item">
+                            <svg class="detail-icon icon" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 2C4.69 2 2 4.69 2 8C2 11.31 4.69 14 8 14C11.31 14 14 11.31 14 8C14 4.69 11.31 2 8 2ZM8.5 8V4H7.5V8.5H11V7.5H8.5V8Z" fill="currentColor"/>
+                            </svg>
+                            <span class="detail-text">October 12-14, 2025</span>
+                        </div>
+                    </div>
+                    <div class="card-divider"></div>
+                    <div class="card-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-time">Friday, October 8, 8:10 p.m.</div>
+                            <div class="timeline-card">
+                                <div class="timeline-indicator"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">Flight #123456789</div>
+                                    <div class="timeline-description">Orlando International, FL → Washington Dulles, DC</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-time">Friday, October 8, 11:00 p.m.</div>
+                            <div class="timeline-card">
+                                <div class="timeline-indicator"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">Check in to Spring Hill Suites by Marriott Ashburn Dulles North</div>
+                                    <div class="timeline-description">24605 Millstream Dr, Aldie, VA 20105</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="card-button">Show Details</button>
+                </div>
+            </div>
+
+            <!-- Conference Card 2 -->
+            <div class="conference-card">
+                <div class="card-banner">
+                    <img src="images/conference-card-2.png" alt="Conference">
+                    <div class="card-banner-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-tag">
+                        <div class="tag-indicator"></div>
+                        <span class="tag-text">Now: Invited</span>
+                    </div>
+                    <h3 class="card-title">Biology and Engineering of the Cell Surface</h3>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <svg class="detail-icon icon" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 2C5.79 2 4 3.79 4 6C4 9 8 13 8 13C8 13 12 9 12 6C12 3.79 10.21 2 8 2ZM8 7.5C7.17 7.5 6.5 6.83 6.5 6C6.5 5.17 7.17 4.5 8 4.5C8.83 4.5 9.5 5.17 9.5 6C9.5 6.83 8.83 7.5 8 7.5Z" fill="currentColor"/>
+                            </svg>
+                            <span class="detail-text">HHMI HQ</span>
+                        </div>
+                        <div class="detail-item">
+                            <svg class="detail-icon icon" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 2C4.69 2 2 4.69 2 8C2 11.31 4.69 14 8 14C11.31 14 14 11.31 14 8C14 4.69 11.31 2 8 2ZM8.5 8V4H7.5V8.5H11V7.5H8.5V8Z" fill="currentColor"/>
+                            </svg>
+                            <span class="detail-text">Dec 12-14, 2025</span>
+                        </div>
+                    </div>
+                    <div class="card-divider"></div>
+                    <div class="card-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-card">
+                                <div class="timeline-indicator" style="opacity: 0.53; background: #DD8209;"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">Registration</div>
+                                    <div class="timeline-description">Waiting for registration to complete.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="card-button">Start Registration</button>
+                </div>
+            </div>
+
+            <!-- Activity Card -->
+            <div class="activity-card">
+                <div class="card-banner">
+                    <img src="images/activity-card-bg.png" alt="Activity">
+                    <div class="card-banner-overlay"></div>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-title">Private business meeting</h3>
+                    <div class="detail-item">
+                        <svg class="detail-icon icon" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 2C4.69 2 2 4.69 2 8C2 11.31 4.69 14 8 14C11.31 14 14 11.31 14 8C14 4.69 11.31 2 8 2ZM8.5 8V4H7.5V8.5H11V7.5H8.5V8Z" fill="currentColor"/>
+                        </svg>
+                        <span class="detail-text">Dec 20, 2025 - 11:40 a.m.</span>
+                    </div>
+                    <div class="activity-location">Meeting Room #32</div>
+                    <button class="card-button">Show Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Past Events Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">My past Events</h2>
+                <a href="#" class="show-all-link">
+                    <span>Show All</span>
+                    <svg viewBox="0 0 20 20" fill="none">
+                        <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="past-event-card">
+                <img src="images/past-event-1.png" alt="Past Event" class="past-event-image">
+                <div class="past-event-content">
+                    <div class="past-event-header">
+                        <span class="past-event-date">Nov 8-10, 2024</span>
+                        <svg class="past-event-arrow icon" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4 class="past-event-title">Intersection of Mechanics and Metabolism Across Biological Scales</h4>
+                </div>
+            </div>
+
+            <div class="past-event-card">
+                <img src="images/past-event-2.png" alt="Past Event" class="past-event-image">
+                <div class="past-event-content">
+                    <div class="past-event-header">
+                        <span class="past-event-date">Nov 8-10, 2024</span>
+                        <svg class="past-event-arrow icon" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4 class="past-event-title">Chemical Tools for Complex Biological Systems IV</h4>
+                </div>
+            </div>
+
+            <div class="past-event-card">
+                <img src="images/past-event-3.png" alt="Past Event" class="past-event-image">
+                <div class="past-event-content">
+                    <div class="past-event-header">
+                        <span class="past-event-date">Nov 8-10, 2024</span>
+                        <svg class="past-event-arrow icon" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4 class="past-event-title">Simulated Bodies: Whole Body Biomechanical Models</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Open Upcoming Events Section -->
+        <div class="section section-gray">
+            <div class="section-header">
+                <h2 class="section-title">Open Upcoming Events</h2>
+                <div style="display: flex; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(0, 0, 0, 0.1);"></div>
+                    <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(0, 0, 0, 0.1);"></div>
+                </div>
+            </div>
+
+            <div class="announcements-container">
+                <div class="announcement-card">
+                    <img src="images/announcement-1.png" alt="Announcement" class="announcement-image">
+                    <div class="announcement-content">
+                        <div class="announcement-date">Aug 20, 2025</div>
+                        <h4 class="announcement-title">Not Every Rose Has Its Thorn… and Now, Scientists Know Why</h4>
+                    </div>
+                </div>
+
+                <div class="announcement-card">
+                    <img src="images/announcement-2.png" alt="Announcement" class="announcement-image">
+                    <div class="announcement-content">
+                        <div class="announcement-date">Aug 20, 2025</div>
+                        <h4 class="announcement-title">HHMI Invests $500 Million in AI-Driven Life Sciences Research</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">© 2025 Howard Hughes Medical Institute</div>
+        <div class="footer-text">Janelia Research Campus, Ashburn, VA</div>
+    </footer>
+
+    <script>
+        // Navigation active state
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+
+        // Button click handlers
+        document.querySelectorAll('.card-button').forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('Button clicked:', this.textContent);
+                // Add your button functionality here
+            });
+        });
+
+        // Past event card click handlers
+        document.querySelectorAll('.past-event-card').forEach(card => {
+            card.addEventListener('click', function() {
+                console.log('Event card clicked');
+                // Add your card click functionality here
+            });
+        });
+    </script>
+</body>
+</html>
+
