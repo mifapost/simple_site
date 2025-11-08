@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello mazafaka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cat-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer-container {
+            margin-top: 40px;
+        }
+
+        .timer-label {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .timer {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            font-family: 'Courier New', monospace;
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            min-width: 250px;
+        }
+
+        .timer-unit {
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .timer-separator {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello mazafaka</h1>
+        
+        <img src="https://cataas.com/cat" alt="Cute cat" class="cat-image" id="catImage">
+        
+        <div class="timer-container">
+            <div class="timer-label">Countdown Timer</div>
+            <div class="timer" id="timer">
+                <span class="timer-unit" id="hours">00</span>
+                <span class="timer-separator">:</span>
+                <span class="timer-unit" id="minutes">00</span>
+                <span class="timer-separator">:</span>
+                <span class="timer-unit" id="seconds">00</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set countdown target (24 hours from now by default)
+        // You can modify this to set a specific date/time
+        const countdownDate = new Date().getTime() + (24 * 60 * 60 * 1000); // 24 hours from now
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            if (distance < 0) {
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Update timer every second
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // Load cat image with fallbacks
+        (function() {
+            const catImage = document.getElementById('catImage');
+            const fallbackSources = [
+                'https://http.cat/200',
+                'https://http.cat/100',
+                'https://http.cat/404'
+            ];
+            let fallbackIndex = 0;
+            
+            catImage.onerror = function() {
+                if (fallbackIndex < fallbackSources.length) {
+                    this.src = fallbackSources[fallbackIndex];
+                    fallbackIndex++;
+                } else {
+                    // Show placeholder if all sources fail
+                    this.style.display = 'none';
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'cat-image';
+                    placeholder.style.cssText = 'width: 100%; max-width: 400px; height: 300px; margin: 30px auto; border-radius: 15px; background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #2d3436; font-size: 3rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);';
+                    placeholder.innerHTML = '🐱<br><span style="font-size: 1rem; margin-top: 10px;">Cat Image</span>';
+                    this.parentNode.insertBefore(placeholder, this);
+                }
+            };
+        })();
+    </script>
+</body>
+</html>
+
